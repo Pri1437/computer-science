@@ -276,6 +276,66 @@ void quicksort(int arr[],int left, int right)
 
 ### Heap sort
 
+In this sorting algorithm we consider a max heap or a min heap (for descending order).
+
+-   Main role is played by Heapify.
+
+Algorithm:
+
+-   Consider an array.
+-   MaxHeapify the array
+-   Then swap the root element (which contains the maximum value) with the last element 
+-   Reduce the size of the array and repeat from step 2 till array is sorted.
+
+Code in C:
+
+```C
+void heapify(int arr[], int x, int n)
+{
+    int left=2*x+1, right=2*x+2;
+    if(left<n && arr[left]>arr[x])
+    {
+        arr[x]=arr[x]+arr[left];
+        arr[left]=arr[x]-arr[left];
+        arr[x]=arr[x]-arr[left];
+        heapify(arr,left,n);
+    }
+    if(right<n && arr[right]>arr[x])
+    {
+        arr[x]=arr[x]+arr[right];
+        arr[right]=arr[x]-arr[right];
+        arr[x]=arr[x]-arr[right];
+        heapify(arr,right,n);
+    }
+}
+
+void maxHeapify(int arr[],int n)
+{
+    for(int i=n/2 - 1;i>=0;i--)
+    {
+        heapify(arr,i,n);
+    }
+}
+
+void heapsort(int arr[], int n)
+{
+    for(int i=n;i>1;i--)
+    {
+        maxHeapify(arr,i);
+        int temp;
+        temp=arr[0];
+        arr[0]=arr[i-1];
+        arr[i-1]=temp;
+    }
+}
+```
+
+-   Time complexity and space complexity:
+    -   Time complexity
+        -   Best case is when 
+        -   Worst case is when 
+    -   Space complexity
+
 * * *
 
 ### Hash sort
