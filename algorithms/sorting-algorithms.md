@@ -292,20 +292,24 @@ Code in C:
 ```C
 void heapify(int arr[], int x, int n)
 {
-    int left=2*x+1, right=2*x+2;
-    if(left<n && arr[left]>arr[x])
+    int left=2*x+1, right=2*x+2, max_i=x;
+    
+    if(left<n && arr[left]>arr[max_i])
     {
-        arr[x]=arr[x]+arr[left];
-        arr[left]=arr[x]-arr[left];
-        arr[x]=arr[x]-arr[left];
-        heapify(arr,left,n);
+        max_i=left;        
     }
-    if(right<n && arr[right]>arr[x])
+    
+    if(right<n && arr[right]>arr[max_i])
     {
-        arr[x]=arr[x]+arr[right];
-        arr[right]=arr[x]-arr[right];
-        arr[x]=arr[x]-arr[right];
-        heapify(arr,right,n);
+        max_i=right;
+    }
+    
+    if(max_i!=x)
+    {
+        arr[x]=arr[x]+arr[max_i];
+        arr[max_i]=arr[x]-arr[max_i];
+        arr[x]=arr[x]-arr[max_i];
+        heapify(arr,max_i,n);
     }
 }
 
