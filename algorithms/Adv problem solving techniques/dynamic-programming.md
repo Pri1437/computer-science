@@ -77,8 +77,11 @@ cut-rod(p[], n) // p[] array of prices, n is length of rod
 }
 ```
 
--   The time complexity of this implementation is very large as 'n' ↑.
+-   The time complexity of this implementation is very large as 'n' ↑ which is in exponential order.
+    -   This is not surprising because total number of combinations that we need to check is $2^{n-1}$.
+    -
     -   This is because this algo calls itself recursively and computes the same parameters (subproblems) over and over.
+    -   You can use recursive trees for writing recurrence relations.
 
 * * *
 
