@@ -1,0 +1,12 @@
+This has basics of data science
+
+### Evaluating the performance of a model
+We use multiple parameters like accuracy, precision, recall (also known as senstivity), F1-score.
+
+Before that we have to see terms like true positive, true negative, false postive and false negative. Here True &rarr; prediction is on par with the actual value.
+Similarly false &rarr; prediction is not on par with actual value.
+
+* True Positive &rarr; Value on par with actual class value and both actual and predicted class value is positive.
+* True Negative &rarr; Value on par with actual class value and both actual and predicted class value is negative.
+* False Positive &rarr; Value not on par with actual class value and predicted value is positive whereas actual val is negative.
+* False Negative &rarr; Value not on par with actual class value and predicted value is negative whereas actual val is positive.
