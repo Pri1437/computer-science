@@ -40,7 +40,7 @@ By giving a value to a parameter before calling the function is basically consid
 If value is specified then value passed on is considered.
 **But if the value is not mentioned then it is bound that function has to be called with that many parameters.**
 ```Python
-def add_numbers(x,y,z=None): #None is a keyword and here a default val
+def add_numbers(x,y,z=None): #None is a keyword for no value and here a default val
      if(z==none):
 	return x+y
      else:
@@ -52,6 +52,7 @@ print(add_numbers(2,2))
 #calling function mentioning z value
 print(add_numbers(1,2,3)) # after function is called z=3 not "None"
 ```
+The optional parameters come at the end of function declaration
 
 Multiple "if"s are evaluated simultaneous whether others pass or fail and "if" with "elif" just evaluates the other if the first one fails
 
@@ -111,6 +112,7 @@ print(str.format('pri','boy')
 
 # output: pri is a good boy
 ```
+String formatting is important in manipulation and data cleaning
 
 #### Dictionaries
 **Dictionaries** are data structure in python that use **key-value pairs**.
@@ -120,8 +122,9 @@ print(str.format('pri','boy')
 * **Each key is unique**
     - Ex: {2:1, 2:2} &rarr; here key value 2 will only be paired with latest value that is 2. (just the value is reassigned)
 * values &rarr; can be anything
+* No ordering in dictionary
 
-Iterating over keys "for i in x" x is dictionary, i will take values of keys.
+Iterating over keys "for i in x" x is dictionary, i will take values of keys.(we could use **x.keys()** also)
 
 Iterating over values "for i in x.values()" where x.values() returns all the dictionary values.
 
@@ -143,7 +146,8 @@ To work on csv files we **import csv package**
 
 **Slicing is allowed in any collection by use of : in [].**
 
-We can use **csv.DictReader(csvfile)** to read the csv file and stores them as ordered dictionary. (basically a list of ordered dict)
+We can use **csv.DictReader(csvfile)** to read the csv file and stores them as ordered dictionary.
+* We store each row of the csv file as ordered dictionary and all the rows together as a list.
 
 %precision 2 &rarr; for controlling the decimal places for floating points while printing (used only in IPython).
 
@@ -153,3 +157,24 @@ with open('file.csv', 'w') as file: #basically the file is used to handle file.c
      file.write('Hello there!')
 ```
 "as" keyword is to create an alias of something that can be module, function etc.
+
+"sum(iterable, start)" it is an inbuilt function that calculates sum of numbers in list.
+* Returns sum of start and elements of the iterable.
+* **start** (optional) &rarr; the values in the iterable are added to this value.
+* Can use generating expressions as iterables.
+
+"'str'.join(sequence)" will return a string that place 'str' in between every consequtive elements of the sequence. Ex: 'hi'.join(['hello','bye','ohh']) &rarr; 'hellohibyehiohh'
+
+**Generator expression** &rarr; d for d in sequence, as it is generating val 'd' using sequence.
+
+**set(iterable)** &rarr; creates a Python set of elements from an iterable.
+* Python set &rarr; use {elements}
+    - Ex: {1,2,3}
+    - But x = {} &rarr; creates an empty dictionary not an empty set
+* Inbuilt function.
+* Iterable &rarr; list, tuple, generating expression, string.
+* returns empty set when no parameters
+
+#### Dates and times in Python
+time.time() &rarr; returns time in seconds relative to jan 1,1970 (epoch)
+
