@@ -75,7 +75,7 @@ a(1,2) #like add_numbers(1,2)
 
 #### List
 **Lists** are type of data structure that are **mutable**
-* We can concatenate lists by using +
+* We can concatenate lists by using +, Ex: ['a','b','c'] + [1,2,3] &rarr; ['a','b','c',1,2,3] (no nested lists present)
 * If we want to repeat elements in list by some amount we use *, **(list)\*num** and it gets repeated "num" times.
 * use "in" operator to check something in list. ex val in list
 * -ve indexes allowed &rarr; start from end "-1" being last element.
@@ -176,5 +176,85 @@ with open('file.csv', 'w') as file: #basically the file is used to handle file.c
 * returns empty set when no parameters
 
 #### Dates and times in Python
-time.time() &rarr; returns time in seconds relative to jan 1,1970 (epoch)
+For handling data and time we use **datetime and time** libraries
 
+There are many methods to store date and time, one of the method is to store date and time in seconds (legacy method)
+
+time.time() &rarr; returns time in seconds relative to jan 1, 1970 (epoch)
+
+Timestamp &rarr; record of data and time of an event that has occurred.
+* To create a timestamp in python we use datetime library
+* datetime.datetime.fromtimestamp(time in seconds relative to epoch) &rarr; returns an **date-time object** consisting of date, time based on seconds mentioned.
+* Ex: datetime.datetime.fromtimestamp(time.time()) &rarr; gives the datetime object consisting of current date and time.
+
+We can do arithmetic on time and date by the use of **time deltas**.
+* datetime.timedelta(days=100) &rarr; create timedelta of 100 days.
+
+datetime.date.today() &rarr; returns current local date
+
+We can add/subtract date value with time delta to get required date.
+
+#### Ojects and map() in Python
+Python supports objects and classes.
+* "class" keyword used for class creation
+* 'doc string' &rarr; tells about a class, it is just for readability
+    - "doc_string" (basically a string which is not assigned to any variable)
+    - To read doc string of an object call "obj_name.__doc__"
+    
+* **Everything in python is an object**.
+    - The variables used are just references.
+    - So a=2 and b=2, suggests us that a and b are pointing to the same object "2". (similar to Java) This allows in efficient use of memory.
+    - In contrast to the implementation in C, where each memory is linked to a name and so a, b would be different memory locations hold value 2.
+    - So any object can be linked to a name, hence the concept of dynamic typing.
+    - Functions are objects too, so they can be identified with a name. Ex: a = addNum
+
+* **Namespaces:**
+      * These are collection of names that are mapped to objects
+      * Three main type of name spaces &rarr; inbuilt namespaces(present until the interpreter is running), module(global), function(local).
+      * Different namespaces can co-exist together and are isolated
+      * As namespaces are isolated names can be reused.
+      * We can use the concept of scoping as a direct result of namespaces.
+
+* **Scoping:**
+      * scope in function, scope in module(program), scope in inbuilt names
+      * First local namespace is searched, then global, then inbuilt namespace.
+      * "global" keyword is used to convert a local namespace name to global namespace name. (wherever "global" keyword is used that name is linked to the global namespace and not the other names that are same which are present in different local namespace)
+```Python
+a=5
+def num():
+    a=2
+    print(id(a),a) # output for 2
+print(id(a),a) # output for 5
+
+def look():
+    global a #makes local a into global, so all changes made reflect to the global a
+    a=3
+    print(id(a),a) #output for 3
+print(id(a),a) #output for 3 again!
+```
+* Classes:
+    - In python, every **class definition** creates a class object by default by the **name of the class**. This class object is used to create other objects of the class.
+      * This object implicitly created by the class name is of no use to us but just to create instants of class.
+      * Functions in classes are function objects.
+      * "self" parameter &rarr; refers to the instance of the class that calls an instance method. (we use self just by convention)
+* Objects:
+    - Created using class object.
+    - "objName=className()"
+    - Functions in objects are method objects
+    -Actually when we call a method of object, the respective is passed into the method implicitly. (So by default every method in class should have atleast one parameter)
+    - "object.method()" is other way of writing "class.method(object)"
+
+Coming to map() in python
+* map() is used for applying a certain function on a iterable object which can be list, tuple, dictionary etc.
+* Basically acts like a transformation.
+* map(function, parameter), parameter &rarr; iterable object. Number of parameters present in map depends on number of parameters that can be taken by the function.
+
+#### Lambda and list comprehensions
+* Lambda functions &rarr; anonymous function, can only take one sentence as function body.
+* Lambda functions are of great use for cleaning of data.
+* "lambda parameters: what to return(in single line)"
+* List comprehensions are to input list using generating expressions(which can use conditional statements)
+* List comprehensions basically make inputing particular values in lists easy and in a compact manner.
+* listName = [var for i in sequence: conditions on var]
+
+#### Numerical Python library (NumPy)
