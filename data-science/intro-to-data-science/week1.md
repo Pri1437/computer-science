@@ -258,3 +258,141 @@ Coming to map() in python
 * listName = [var for i in sequence: conditions on var]
 
 #### Numerical Python library (NumPy)
+This library is the core for scientific computing, it has n-dimensional array objects. This is mainly used for linear algebra.
+
+**arrays** hold only homogeneous elements.
+
+Creation of arrays:
+* numpy.array([lists/tuples]) &rarr; creates an array with the respective lists and tuple (basically list of lists/tuples or combination of tuple and list)
+   -  b = numpy.array([[1,2,3], [1,2,3]]) &rarr; 2x3 array
+
+* another way is by "linspace", numpy.linspace(start, end, num of elements) &rarr; returns an array with elements with equal spaces between them. (used mostly for plotting graphs)
+   - Ex: a = numpy.linspace(1,3,10) &rarr; gives 1, 1.222, 1.444, 1.666, ..., 3.
+
+* numpy.arange(start, stop, step) &rarr; this function is analogies to range(start, stop, step) where default step is 1. It creates an array from "start" to "stop" with step value.
+
+Q) Why use numpy array when we have list?
+
+Ans) numpy arrays beat list in:
+* Performance (better performance)
+* Memory (arrays use less mem)
+* Convenience (easy to use numpy)
+
+To check the performance of array vs list (we consider the case of adding corresponding elements)
+```Python
+import numpy as np
+import time
+import sys
+
+value=100000
+list1 = range(value)
+list2 = range(value)
+
+arr1=numpy.arange(value)
+arr2=numpy.arange(value)
+
+start = time.time() # current time in seconds
+result = [ x+y for x,y in zip(list1, list2 ) ] # zip puts corresponding elements in tuples and returns an iterator of those tuples
+print((time.time() - start) * 1000)
+
+start = time.time()
+result = arr1 + arr2 # only condn is that len(arr1) = len(arr2)
+print((time.time() - start) * 1000)
+```
+
+To check memory usage of list and array
+```Python
+import numpy as np
+import sys
+
+l = range(10000) # range() returns a list
+
+arr = np.arange(10000)
+
+# print(sys.getsizeof(l)) # sys.getsizeof(list) gives size of list object which is basically list of references to objects () so size of actual list is smaller than expected.
+
+print(sys.getsizeof(1)*len(l))
+
+print(sys.getsizeof(arr))
+```
+
+sys.getsizeof(numpyArr) &rarr; gives you the total size in bytes of the numpy array object. Which has numbers stored along with corresponding attributes and methods (generally 96 bytes is for these attributes and methods)
+
+Numpy arrays are both better in performance and use less memory than lists.
+
+**Numpy Operations**
+Attributes in numpy array:
+* numpyArr.ndim &rarr; holds what is the dimension of "numpyArr"
+
+* numpyArr.itemsize &rarr; holds the size of each item present.
+
+* numpyArr.dtype &rarr; holds the data type of each element (FYI numpy arrays can hold any objects but all must be same)
+
+* numpyArr.size &rarr; holds the number of elements of the array
+
+* numpyArr.shape &rarr; tells you the number of rows and columns
+
+Methods in numpy array:
+* numpyArr.reshape(row, col) &rarr; returns an array with the given rows and columns. (basically transformation)
+
+* numpyArr[ a:b , c:d ] &rarr; the colon operator like in lists is used for slicing elements from the array. (can happen in contiguous manner)
+    - i: &rarr; from i to end of the index values
+    - :i &rarr; from beginning to i-1 th index
+    - : &rarr; everything
+    - The slicing occurs with combinations of row and column indicies.
+      * Ex: arr[1:5, 2: 4] &rarr; considers combinations such as 1 to 2, 3 and 2 to 2,3 etc.
+
+* numpyArr.max() &rarr; returns the maximum element in the array
+
+* numpyArr.min() &rarr; returns minimum element in the array
+
+* **Concept of axis in numpy arrays:**
+    - Rows &rarr; axis 1
+    - Columns &rarr; axis 0
+    - We use axis for finding "sum" (specifically column and rows)
+      * numpyArr.sum(axis=0) &rarr; finding sum of all columns
+      * numpyArr.sum(axis=1) &rarr; finding sum of all rows
+
+* The argmax() and argmin() functions give index of max and min value respectively but the index they return for a corresponding 1 dimensional array.
+    - In case this happens, to find that element in the 2 dimensional array is by calculating the row number and column number
+    - Row number = index/(columns in 2D array) and column number = index%(columns in 2D array)
+
+**Other operations on arrays**
+* Addition &rarr; here corresponding elements of arrays of equal size and shape are added
+    - Ex: a = np.array([[1,2,3], [3,4,5]]) and b = np.array([[1,2,3], [3,4,5]]) so, a+b &rarr; [[2,4,6], [6,8,10].
+    - We can add a particular value to all elements in array by "arr + value"
+
+* Subtraction &rarr; here corresponding elements of arrays of equal size and shape are subtracted
+    - Ex: a = np.array([[1,2,3], [3,4,5]]) and b = np.array([[1,2,3], [3,4,5]]) so, a-b &rarr; [[0,0,0], [0,0,0].
+    - We can subtract a particular value from all elements in array by "arr - value"
+
+* Multiplication &rarr; corresponding elements are multiplied (not like matrix multiplication)
+    - Ex: a = np.array([[1,2,3], [3,4,5]]) and b = np.array([[1,2,3], [3,4,5]]) so, a*b &rarr; [[1,4,9], [9,16,25].
+    - We can multiply a particular value to all elements in array by "arr * value"
+
+* Division &rarr; corresponding elements are divided.
+    - Ex: a = np.array([[1,2,3], [3,4,5]]) and b = np.array([[1,2,3], [3,4,5]]) so, a/b &rarr; [[1,1,1], [1,1,1].
+    - We can divide a particular value from all elements in array by "arr (/ or //) value"
+
+* numpyArr.ravel() &rarr; it takes all rows and places them one after the other into 1D array (like untieing or unravelling)
+    - Ex: arr = np.array([[1,2], [1,2]]), arr.ravel() &rarr; [1,2,1,2]
+
+Library functions:
+
+* numpy.sqrt(value) &rarr; returns square root of the value
+    - When we pass an array we get a array with elements which are float
+    - Can pass normal numbers too
+
+* numpy.std(object) &rarr; returns standard deviation of the object
+    - Standard deviation = sqrt(mean of sum of squares of deviation)
+
+* Stacking &rarr; we join two matrices together either along columns (known as vertical stacking) or along rows (known as horizontal stacking). So I can stack how many arrays I want.
+    - numpy.vstack((arr1, arr2, ...)) &rarr; for vertical stacking of arrays
+      * condition &rarr; **number of columns** of all arrays must be same irrespective of rows.
+    - numpy.hstack((arr1, arr2, ...)) &rarr; for horizontal stacking of arrays
+      * condition &rarr; **number of rows** must be same irrespective of columns
+    - Each of these stack functions take **only one argument**, so you pass the arrays as a tuple.
+
+Apart from dealing with only arrays, numpy has many mathematical associated functions like trignometry functions, logs etc. These functions take input and apply respective mathematical operation and return the results.
+
+In exponentional(numpy.exp()) we take e = 2.7, numpy.log() &rarr; natural log, for base 10 we use numpy.log10()
