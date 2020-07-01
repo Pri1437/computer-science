@@ -1,0 +1,14 @@
+Used Libraries
+
+beautifulsoup
+requests
+os
+Pandas
+Numpy
+Matplotlib
+
+Can do
+animation with graphs (awesome)
+
+covid datasets
+WHO
