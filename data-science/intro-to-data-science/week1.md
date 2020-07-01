@@ -320,6 +320,8 @@ sys.getsizeof(numpyArr) &rarr; gives you the total size in bytes of the numpy ar
 
 Numpy arrays are both better in performance and use less memory than lists.
 
+Numpy n-dimensional arrays can hold columns of different datatype.
+
 **Numpy Operations**
 Attributes in numpy array:
 * numpyArr.ndim &rarr; holds what is the dimension of "numpyArr"
