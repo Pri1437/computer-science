@@ -119,7 +119,6 @@ We can create individual series (columns) then create the data frame from those 
     - Now if I don't create series before hand and use arrays / list then the **column labels are by default integers**
 * Now use pandas.DataFrame([list of series], index = []), now here index creates row labels and labels on the series become column names.
     - If index is None then by default we get integers as labels for rows.
-* 
 
 #### Finding elements in data frames
 In series we used iloc and loc for identifying an element, similarly in data frame we use **loc and iloc for identifying rows (effectively elements from different series)**
@@ -142,6 +141,7 @@ loc and iloc both support slicing
       * Chaining? &rarr; basically combining two operations together, querying for data by using loc and also indexing for a particular column
       * Ex: dataframe.loc[ rowLabel ][ colLabel ]
       * **Chaining causes pandas to return copy of dataframe instead of view the original**
+* We can use two consecutive indexing operator, like **df['col'][int] &rarr; 'col' is column label and int is index of a row**.
 
 **All properties of numpy arrays are present in data frame and series**
 
@@ -230,7 +230,7 @@ How to write boolean masks:
     - Corresponding elements will have true / false based on whether the condition is met or not, here if value is greater than 5 or not.
 * **Whatever boolean mask we get is a copy of the original series / data frame**
 
-To be able to filter data we need to use our boolean masks over our data frame, this can be done using:
+**Applying boolean masks over our data frame, this can be done using:**
 * where function &rarr; df.where( boolean condition ) returns the filtered series / data frame
     - Ex: df.where(df['col1'] >=5)
 * indexing, overloads indexing operator ( [ boolean condition ] )
@@ -257,3 +257,24 @@ When using multiple boolean masks / basically an expression **wrap** each boolea
 
 Ex: df[ (df['col3'] > 5) & (df['col4'] < 7) ]
 
+**Q) How to query a subset of elements from already filtered data frame by the use of boolean masks?**
+
+Ans)
+* Instead of a one line statement, reference we could copy it to another reference and then query the required element(s).
+```Python
+temp = df[ df['col1'] > 6 ]
+print(temp['col4'])
+```
+* Other way is to get filtered data frame and then apply your query on it (similar chaining)
+```Python
+temp = df[ df['col1'] < 5 ][ 'col4' ] # idea is that operation happens from left to right
+# so first we get the filtered array then we query the element required from that.
+print(temp)
+```
+
+* We could query our data and then filter it to the final requirement too!!
+```Python
+temp = df['col4'][ df['col1'] < 5 ]
+print(temp)
+```
+This example gives the same result as the above one
