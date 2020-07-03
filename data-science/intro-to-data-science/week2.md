@@ -199,8 +199,61 @@ This function has hell load of parameters but we will be using only selected few
 
 The default data frame created uses indices for both columns and rows as labels, in case you wanna change this we need to play with other parameters.
 
+So to change to the desired rows and columns we use:
+* index_col (integer) &rarr; this parameter will tell read_csv to consider the dataframe columns from that column index.
+    - Ex: read_csv(filepath, index_col = 1) &rarr; means that the data frame will have columns including and after the column with index 1 (second column).
+* header (integer) &rarr; parameter to tell which row will serve as column indices.
+* names &rarr; user provides column names externally as a parameter.
+* engine &rarr; which parsing engine to use either C engine (faster) or python engine (more features)
+* skiprows (integer) &rarr; tells how to many rows to skip from top and resultant row on top is used as column labels.
+* nrows &rarr; to specify how many rows to read from the file.
+
 Now we know that a data frame is ultimately an object so to keep track of row labels and colum label it has certain attributes for that.
 
 So to change any column/row name we need to see in the list of column/row names.
 * dataframe.column &rarr; for column labels
 * dataframe.index &rarr; for row labels
+
+### Querying a Data Frame
+Boolean masking is where we consider a series / data frame of same size as the one with data and here elements are true / false only based on which values we want to see or filter.
+* Corresponding elements with True value will have values passed from original data frame / series.
+* Whichever elements are false will be shown as NaN in the final data frame / series.
+
+Boolean masking is useful for querying specific data, they can be used to filter data where we can see whichever data is required.
+
+**Q) Now how to write boolean masks and how to use them?**
+
+How to write boolean masks:
+* We can broadcast comparision operators onto the whole series or data frame.
+* Or we project rows / columns and then broadcast an operator (comparision operator) which results in **corresponding series which has labels mapped to true / false based on the condition mentioned**
+    - Ex: df['column1'] > 5 &rarr; returns a boolean mask which is obtained by applying the ">" operator to 'column1'
+    - Corresponding elements will have true / false based on whether the condition is met or not, here if value is greater than 5 or not.
+* **Whatever boolean mask we get is a copy of the original series / data frame**
+
+To be able to filter data we need to use our boolean masks over our data frame, this can be done using:
+* where function &rarr; df.where( boolean condition ) returns the filtered series / data frame
+    - Ex: df.where(df['col1'] >=5)
+* indexing, overloads indexing operator ( [ boolean condition ] )
+    - Ex: df [ df['col4'] > 6 ]
+
+**Note!** boolean condition &rarr; boolean masks, df > / < .. any comparision operator.
+
+**Dropping data that don't have values (NaN)**
+
+We can use dropna() (dropping any values that are NaN). Default axis for dropna() is axis = 0 (which is top to bottom / through rows)
+* Axis = 0 if any row has NaN element then that row is dropped (axis = 0 is default)
+* Axis = 1 if any column has NaN element then that whole column is dropped
+
+More interesting things about boolean masks:
+* Two or more boolean masks with bit-wise operator results in a boolean mask
+* Applying these operations is similar to boolean algebra.
+
+Ex: df['col2'] > 3 | df['col3'] < 7 (| &rarr; bit-wise OR, & &rarr; bit-wise AND)
+
+By the use of boolean masks we can create complex conditions with can filter data to our needs.
+
+### Note !!!
+When using multiple boolean masks / basically an expression **wrap** each boolean mask in () to avoid conflict in operator precedence.
+
+Ex: df[ (df['col3'] > 5) & (df['col4'] < 7) ]
+
