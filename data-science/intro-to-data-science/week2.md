@@ -260,7 +260,7 @@ Ex: df[ (df['col3'] > 5) & (df['col4'] < 7) ]
 **Q) How to query a subset of elements from already filtered data frame by the use of boolean masks?**
 
 Ans)
-* Instead of a one line statement, reference we could copy it to another reference and then query the required element(s).
+* Instead of a one line statement, we could copy it to another reference and then query the required element(s).
 ```Python
 temp = df[ df['col1'] > 6 ]
 print(temp['col4'])
@@ -278,3 +278,72 @@ temp = df['col4'][ df['col1'] < 5 ]
 print(temp)
 ```
 This example gives the same result as the above one
+
+This means that we can query any other column/row based on a condition(s)
+
+### Indexing DataFrames
+**When you have an empty it's values will be NONE or NaN(if with numerical values)**
+
+Apparently dataframe.index and dataframe.columns are immutable lists
+
+**Promoting a column's values to index** (here old indices get destroyed so you need to copy them)
+
+Promotion is done by set_index(column) &rarr; gives copy, to do it in place we have to use 'inplace = True' to not create a copy and change the main data frame.
+
+For multilevel indexing we use set_index([columns]), this multilevel is done in order which they are mentioned
+
+Resetting indices
+We use reset_index() &rarr; removes the current index and converts it into a column and sets up default numeric indices.
+
+Changing indices
+* As index and columns are immutable you have to use special functions to make any changes.
+* can use **dataframe.rename(columns={oldcol : newcol}, index={oldindex : new index})**
+    - rename creates a copy of original data frame, we have to use inplace = True for change to reflect on the original.
+* 
+
+Multilevel indexing (similar to composite keys in DBMS)
+
+Multilevel indexing is generally used in demographic data or wherever you want to structure it logically.
+
+levels in multilevel indexing (hierarchical labelling) (same thing can be done for columns)
+* Each column which has become an index is known as a level, the level's numerical value gradually increase from left to right.
+    - Left most level is 0
+* When we want to **query** values from multilevel indices we can use **loc** where we pass the multilevel indices as a **one / list of tuples in order of levels**
+    - df.loc[ [(multilevel indices)], forColumns ], for using multilevel with columns
+    - df.loc[ index1, index2 ] / df.loc[ (index1, index2) ] when we need only the row.
+
+**Q) How to add new rows and columns in multilevel indexing?**
+* Firstly it is not the same way as in single level indexing
+* we can use **dataframe.append(other, ignore_index=False, verify_integrity=False)** &rarr; adds new rows from 'other' to original and returns appended data frame (original + new rows)
+    - Other &rarr; DataFrame / Series / dictionary-like objects
+    - So we try to use "name" parameter to align them to the multilevel indices.
+      * But "name" parameter is used in data frame or series function not in append.
+
+### Missing values
+Pandas use None and NaN to show missing values.
+
+Missing values are common during data cleaning activities.
+
+**Dealing missing values while loading**
+
+The built-in functions that read from delimited files (like csv) have a few ways to control missing values, like in **general na_values list indicates other strings that could indicate missing values**
+
+If you want to turn off whitespace filtering, to maybe want whitespaces for some reason then we can use **na_filter**
+
+**Dealing with missing values in data frame**
+
+Sometimes missing values do have information in them, there are multiple ways to work with missing values, one of them using filling function.
+
+Filling function:
+* df.fillna(value = None, method = None, ...) helps filling up missing values. (na &rarr; not applicable)
+    - "value" parameter is used for replacing all missing values by a single value.
+    - "method" refers to which way must the filling of missing values occur
+       * ffill &rarr; stands for forward filling, we fill previous cell's value to corresponding cell of next row (next below cell is filled)
+       * bfill &rarr; backward filling, which is opposite of forward filling. (basically previous above cell is filled)
+    - To be able to use these methods data must be **sorted**, so the filling can take please according to you
+
+Sorting in pandas data frame can be done based on indices by use of sort_index() and we can also sort based on values.
+
+We can deal with one column or multiple columns which have missing values by projecting them.
+
+Statistical functions like calculating mean exclude missing values by default.
