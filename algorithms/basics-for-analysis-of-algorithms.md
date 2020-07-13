@@ -19,6 +19,10 @@ The total amount of time required by the algorithm to complete the task. In  sim
 
 **Q)** Ok, now we said that it is the total time req. so now how do we actually calculate the time? On what basis do we calculate it?
 
+#### Concise explanation of different worst-case times (Big(O))
+
+![different Notations](https://www.geeksforgeeks.org/wp-content/uploads/mypic.png)
+
 ### Space complexity
 
 The total amount of space required by the algorithm to complete the task. In simple, **total memory needed** to run the algo.
