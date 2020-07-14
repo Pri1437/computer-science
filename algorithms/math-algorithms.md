@@ -8,18 +8,24 @@ Hint: The gcd of two numbers will always be the less than or equal to the minimu
 
 -   **Brute force:** Basically check all numbers that divide the both numbers from 1 → (lower of the two numbers a,b). Then find the largest among the divisors that divide a,b. Worst-case complexity is O(min(a,b)) → O(n).
 -   **Euclidean algorithm:** In this algorithm we exploit the idea that if a,b have a common factor 'f' then (a mod b) (which is a - k*b) also has the same common factor,
-
-So a = n_{1} * f and b = n_{2} * f and f is the common factor of a, b.
-
-So considering a mod b = a-k*b = (n_{1} - k*n_{2})*f. This means that a mod b also has same factor $f$.
-
-_Theorem: gcd(a,b) = gcd(b,a mod b)_.
-
-Using this our algo has two cases:
-
-Base case: GCD (x,0) = x
-
-Other case: GCD(a,b) = GCD(b, a mod b). This algorithm is a _tail linear recursive algorithm_
+    - So a = n_{1} * f and b = n_{2} * f and f is the common factor of a, b.
+    - So considering a mod b = a-k*b = (n_{1} - k*n_{2})*f. This means that a mod b also has same factor f.
+    - _Theorem: gcd(a,b) = gcd(b,a mod b)_.
+    - Using this our algo has two cases:
+      * Base case: GCD (x,0) = x
+      * Other case: GCD(a,b) = GCD(b, a mod b). This algorithm is a _tail linear recursive algorithm_
+```Python
+gcd(a,b):
+# thumb rule try to keep larger value on the left
+  if a < b:
+     temp = a
+     a = b
+     b = temp
+  if b == 0:
+     return a
+  return gcd(b, a % b)
+# as this is tail recursive we can implement the same using a loop
+```
 
 ### Checking if a number is prime or not
 
