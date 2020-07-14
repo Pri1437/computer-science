@@ -1,7 +1,3 @@
-i---
-title: "Math algorithms"
-tags: ""
----
 ### GCD algorithms
 
 Hint: The gcd of two numbers will always be the less than or equal to the minimum of the two numbers.
