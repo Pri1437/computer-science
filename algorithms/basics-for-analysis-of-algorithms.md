@@ -34,15 +34,15 @@ To explain the upper bound (worst-case), lower bound (best-case), tight bound (a
 **Acutally finding out the upper, lower and tight bound**, let f(n) be our function:
 * O(g(n)) &arr; a > 0, c > 0 (constant) such that for some c and for all n > a, f(n) <= c*g(n) then we say f(n) is O(g(n)) which means **g(n) is upper bound of f(n)**
 
-![big Oh](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.programiz.com%2Fdsa%2Fasymptotic-notations&psig=AOvVaw0po39Yjl6Sv18O1PNWb4lG&ust=1594889666504000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKjV85TxzuoCFQAAAAAdAAAAABAD)
+![big Oh](https://cdn.programiz.com/sites/tutorial2program/files/big0.png)
 * Omega(g(n)) &rarr; a > 0, c > 0 (constant) such that for some c and for all n > a, f(n) >= c*g(n) then we say f(n) is Omega(g(n)) which means **g(n) is lower bound of f(n)**
 
-![big omega](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.codesdope.com%2Fcourse%2Falgorithms-growth-of-a-function%2F&psig=AOvVaw1ukuvkl_NE4DYtZr-x5c0y&ust=1594889889714000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNjLm4TyzuoCFQAAAAAdAAAAABAD)
+![big omega](https://cdn.programiz.com/sites/tutorial2program/files/omega.png)
 * Theta(g(n)) &rarr; a > 0, c1 > 0 and c2 > 0 (constants) such that for some c1, c2 and for all n > a, c1*g(n) <= f(n) <= c2*g(n) then we say f(n) is Theta(g(n)) which means **g(n) is tight bound of f(n)**
      - When O(g(n)) = Omega(g(n)) then Theta(g(n)) is true
      - When Theta(g(n)) implies O(g(n)) and Omega(g(n))
 
-![big theta](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.programiz.com%2Fdsa%2Fasymptotic-notations&psig=AOvVaw303yOsy-VW9ZOeiFSzf1t7&ust=1594889859436000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLDw4-7xzuoCFQAAAAAdAAAAABAD)
+![big theta](https://cdn.programiz.com/sites/tutorial2program/files/theta.png)
 
 #### Thumb rules for finding time functions and their asymptotic notations
 * Drop lower terms in cas of polynomials, as we deal with large inputs we have to only take the largest power
